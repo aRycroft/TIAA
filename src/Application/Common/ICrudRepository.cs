@@ -5,6 +5,6 @@
         Task<T> GetAsync(int id);  
         Task<T[]> GetAllAsync();
         Task<T> AddAsync(T entity);
-        Task<T> UpdateAsync(T entity);
+        Task UpdateAsync(T entity);
     }
 }

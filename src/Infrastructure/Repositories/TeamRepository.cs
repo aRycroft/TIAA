@@ -20,7 +20,7 @@ namespace Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Team> UpdateAsync(Team entity)
+        public Task UpdateAsync(Team entity)
         {
             throw new NotImplementedException();
         }

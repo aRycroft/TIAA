@@ -12,11 +12,12 @@ namespace Application.UnitTests.Features.Partners
     {
         private readonly Mock<IPartnerRepository> _mockRepository;
         private readonly IPartnerService _systemUnderTest;
+
         public PartnerServiceFixture()
         {
             _mockRepository = new Mock<IPartnerRepository>();
             _mockRepository.Setup(x => x.GetAsync(It.IsAny<int>())).ReturnsAsync(new Partner { Id = 1, Name = "Test partner." });
-            _mockRepository.Setup(x => x.GetAllAsync()).ReturnsAsync(new Partner[] { new Partner { Id = 1, Name = "Test Team" } });
+            _mockRepository.Setup(x => x.GetAllAsync()).ReturnsAsync(new Partner[] { new Partner { Id = 1, Name = "Test partner." } });
             _systemUnderTest = new PartnerService(_mockRepository.Object, new PartnerAdapter());
         }
 

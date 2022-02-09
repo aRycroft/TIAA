@@ -32,11 +32,11 @@ namespace Application.UnitTests.Features.Teams
         [Fact]
         public async Task Get_Teams_Async_Should_Call_Repository()
         {
-            var teams = await _systemUnderTest.GetTeamsAsync(new GetAllTeamsQuery { });
+            var teams = await _systemUnderTest.GetAllTeamsAsync(new GetAllTeamsQuery { });
             Assert.NotNull(teams);
             Assert.NotEmpty(teams);
             _mockRepository.Verify(x => x.GetAllAsync(), Times.Once, 
-                $"{nameof(TeamService)} should call {nameof(ITeamRepository)} during method {nameof(TeamService.GetTeamsAsync)}");
+                $"{nameof(TeamService)} should call {nameof(ITeamRepository)} during method {nameof(TeamService.GetAllTeamsAsync)}");
         }
 
         [Fact]

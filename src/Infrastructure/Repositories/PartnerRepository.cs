@@ -20,7 +20,7 @@ namespace Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Partner> UpdateAsync(Partner entity)
+        public Task UpdateAsync(Partner entity)
         {
             throw new NotImplementedException();
         }

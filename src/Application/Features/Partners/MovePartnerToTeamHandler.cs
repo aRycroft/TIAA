@@ -1,24 +1,31 @@
-﻿using Application.Interfaces;
-using Shared.Features.Teams;
+﻿using Application.Common.Exceptions;
+using Application.Interfaces;
+using Shared.Features.Partners;
 
 namespace Application.Features.Partners
 {
     public class MovePartnerToTeamHandler : IMovePartnerToTeamHandler
     {
         private readonly IPartnerRepository _partnerRepository;
+        private readonly ITeamRepository _teamRepository;
 
-        public MovePartnerToTeamHandler(IPartnerRepository partnerRepository)
+        public MovePartnerToTeamHandler(IPartnerRepository partnerRepository, ITeamRepository teamRepository)
         {
             _partnerRepository = partnerRepository;
+            _teamRepository = teamRepository;
         }
 
         public async Task MovePartnerToTeam(MovePartnerToTeamCommand command)
         {
-            var entity = await _partnerRepository.GetAsync(command.PartnerId);
+            var partner = await _partnerRepository.GetAsync(command.PartnerId) 
+                ?? throw new EntityNotFoundException("Failed to move partner to team");
 
-            entity.TeamId = command.TeamId;
+            var team = await _teamRepository.GetAsync(command.TeamId)
+                ?? throw new EntityNotFoundException("Failed to find team to move to");
 
-            await _partnerRepository.UpdateAsync(entity);
+            partner.Team = team;
+
+            await _partnerRepository.UpdateAsync(partner);
         }
     }
 

@@ -1,7 +1,6 @@
 ﻿using Application.Features.Partners;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Features.Partners;
-using Shared.Features.Teams;
 
 namespace Api.Controllers
 {
@@ -16,9 +15,15 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] GetAllPartnersQuery query)
+        public async Task<IActionResult> GetAll([FromQuery] GetAllPartnersQuery query)
         {
             return Ok(await _partnerService.GetAllPartnersAsync(query));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get([FromQuery] GetPartnerQuery query)
+        {
+            return Ok(await _partnerService.GetPartnerAsync(query));
         }
 
         [HttpPatch]

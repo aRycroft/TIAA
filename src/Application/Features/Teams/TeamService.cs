@@ -21,7 +21,7 @@ namespace Application.Features.Teams
             return _teamAdapter.DtoFromEntity(entity);
         }
 
-        public async Task<IEnumerable<TeamDto>> GetTeamsAsync(GetAllTeamsQuery query)
+        public async Task<IEnumerable<TeamDto>> GetAllTeamsAsync(GetAllTeamsQuery query)
         {
             var entities = await _teamRepository.GetAllAsync();
             return entities.Select(_teamAdapter.DtoFromEntity);
@@ -41,7 +41,7 @@ namespace Application.Features.Teams
     public interface ITeamService
     {
         Task<TeamDto> GetTeamAsync(GetTeamQuery query);
-        Task<IEnumerable<TeamDto>> GetTeamsAsync(GetAllTeamsQuery query);
+        Task<IEnumerable<TeamDto>> GetAllTeamsAsync(GetAllTeamsQuery query);
         Task<Team> AddTeamAsync(AddTeamCommand command);
         Task UpdateTeamAsync(UpdateTeamCommand command);
     }

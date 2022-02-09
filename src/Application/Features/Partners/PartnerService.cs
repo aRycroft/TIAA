@@ -29,8 +29,7 @@ namespace Application.Features.Partners
         
         public async Task<Partner> AddPartnerAsync(AddPartnerCommand command)
         {
-            var entity = await _partnerRepository.AddAsync(_partnerAdapter.EntityFromAddCommand(command));
-            return entity;
+            return await _partnerRepository.AddAsync(_partnerAdapter.EntityFromAddCommand(command));
         }
 
         public async Task UpdatePartnerAsync(UpdatePartnerCommand command)
