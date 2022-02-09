@@ -15,7 +15,7 @@ namespace Api.Controllers
             _teamService = teamService;
         }
 
-        [HttpGet]
+        [HttpGet, Route("GetAll")]
         public async Task<IActionResult> GetAll([FromQuery] GetAllTeamsQuery query)
         {
             return Ok(await _teamService.GetAllTeamsAsync(query));

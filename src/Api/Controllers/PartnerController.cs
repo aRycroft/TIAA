@@ -14,7 +14,7 @@ namespace Api.Controllers
             _partnerService = partnerService;
         }
 
-        [HttpGet]
+        [HttpGet, Route("GetAll")]
         public async Task<IActionResult> GetAll([FromQuery] GetAllPartnersQuery query)
         {
             return Ok(await _partnerService.GetAllPartnersAsync(query));
