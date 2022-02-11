@@ -1,4 +1,5 @@
 ﻿using Api.Controllers;
+using Application.Entities;
 using Application.Features.Teams;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -42,6 +43,24 @@ namespace Api.UnitTests.Controllers
                 () => _systemUnderTest.Get(new GetTeamQuery()),
                 () => _mockTeamService.Verify(x => x.GetTeamAsync(It.IsAny<GetTeamQuery>()), Times.Once(),
                     $"{nameof(TeamController.Get)} should call partner service once."));
+        }
+
+        [Fact]
+        public async Task Post_Returns_Valid_Result()
+        {
+            await ControllerTestMethods.AssertControllerMethodReturnsExpectedAndCallsService<OkObjectResult, Team>(
+                () => _systemUnderTest.Post(new AddTeamCommand()), 
+                () => _mockTeamService.Verify(x => x.AddTeamAsync(It.IsAny<AddTeamCommand>()), Times.Once(), 
+                    $"{nameof(TeamController.Post)} should call partner service once."));
+        }
+
+        [Fact]
+        public async Task Put_Returns_Valid_Result()
+        {
+            await ControllerTestMethods.AssertControllerMethodReturnsExpectedAndCallsService<OkResult>(
+                () => _systemUnderTest.Put(new UpdateTeamCommand()), 
+                () => _mockTeamService.Verify(x => x.UpdateTeamAsync(It.IsAny<UpdateTeamCommand>()), Times.Once(), 
+                    $"{nameof(TeamController.Put)} should call partner service once."));
         }
     }
 }

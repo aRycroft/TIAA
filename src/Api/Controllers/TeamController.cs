@@ -26,5 +26,18 @@ namespace Api.Controllers
         {
             return Ok(await _teamService.GetTeamAsync(query));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] AddTeamCommand command)
+        {
+            return Ok(await _teamService.AddTeamAsync(command));
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] UpdateTeamCommand command)
+        {
+            await _teamService.UpdateTeamAsync(command);
+            return Ok();
+        }
     }
 }

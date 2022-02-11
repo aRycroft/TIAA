@@ -1,28 +1,13 @@
 ﻿using Application.Entities;
 using Application.Interfaces;
+using Infrastructure.DbContexts;
 
 namespace Infrastructure.Repositories
 {
-    public class TeamRepository : ITeamRepository
+    public class TeamRepository : CrudRepository<Team>, ITeamRepository
     {
-        public Task<Team> GetAsync(int id)
+        public TeamRepository(IApplicationDbContext dbContext) : base(dbContext)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Team[]> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Team> AddAsync(Team entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(Team entity)
-        {
-            throw new NotImplementedException();
         }
     }
 }

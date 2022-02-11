@@ -9,6 +9,7 @@ namespace Application.Features.Partners
         {
             return new PartnerDto
             {
+                Id = partner.Id,
                 Name = partner.Name
             };
         }

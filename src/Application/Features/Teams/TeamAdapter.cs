@@ -9,6 +9,7 @@ namespace Application.Features.Teams
         {
             return new TeamDto
             {
+                Id = team.Id,
                 Name = team.Name
             };
         }

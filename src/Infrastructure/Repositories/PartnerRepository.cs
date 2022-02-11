@@ -1,28 +1,13 @@
 ﻿using Application.Entities;
 using Application.Interfaces;
+using Infrastructure.DbContexts;
 
 namespace Infrastructure.Repositories
 {
-    public class PartnerRepository : IPartnerRepository
+    public class PartnerRepository : CrudRepository<Partner>, IPartnerRepository
     {
-        public Task<Partner> GetAsync(int id)
+        public PartnerRepository(IApplicationDbContext dbContext) : base(dbContext)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Partner[]> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-        
-        public Task<Partner> AddAsync(Partner entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(Partner entity)
-        {
-            throw new NotImplementedException();
         }
     }
 }

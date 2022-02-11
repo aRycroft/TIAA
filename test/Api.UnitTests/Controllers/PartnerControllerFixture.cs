@@ -1,4 +1,5 @@
 ﻿using Api.Controllers;
+using Application.Entities;
 using Application.Features.Partners;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -42,6 +43,24 @@ namespace Api.UnitTests.Controllers
                 () => _systemUnderTest.Get(new GetPartnerQuery()), 
                 () => _mockPartnerService.Verify(x => x.GetPartnerAsync(It.IsAny<GetPartnerQuery>()), Times.Once(), 
                     $"{nameof(PartnerController.Get)} should call partner service once."));
+        }
+
+        [Fact]
+        public async Task Post_Returns_Valid_Result()
+        {
+            await ControllerTestMethods.AssertControllerMethodReturnsExpectedAndCallsService<OkObjectResult, Partner>(
+                () => _systemUnderTest.Post(new AddPartnerCommand()), 
+                () => _mockPartnerService.Verify(x => x.AddPartnerAsync(It.IsAny<AddPartnerCommand>()), Times.Once(), 
+                    $"{nameof(PartnerController.Post)} should call partner service once."));
+        }
+
+        [Fact]
+        public async Task Put_Returns_Valid_Result()
+        {
+            await ControllerTestMethods.AssertControllerMethodReturnsExpectedAndCallsService<OkResult>(
+                () => _systemUnderTest.Put(new UpdatePartnerCommand()), 
+                () => _mockPartnerService.Verify(x => x.UpdatePartnerAsync(It.IsAny<UpdatePartnerCommand>()), Times.Once(), 
+                    $"{nameof(PartnerController.Put)} should call partner service once."));
         }
 
         [Fact]

@@ -26,6 +26,19 @@ namespace Api.Controllers
             return Ok(await _partnerService.GetPartnerAsync(query));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] AddPartnerCommand command)
+        {
+            return Ok(await _partnerService.AddPartnerAsync(command));
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] UpdatePartnerCommand command)
+        {
+            await _partnerService.UpdatePartnerAsync(command);
+            return Ok();
+        }
+
         [HttpPatch]
         public async Task<IActionResult> MovePartnerToTeam([FromServices] IMovePartnerToTeamHandler handler, MovePartnerToTeamCommand command)
         {

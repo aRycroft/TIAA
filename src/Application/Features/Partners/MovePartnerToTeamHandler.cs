@@ -18,10 +18,10 @@ namespace Application.Features.Partners
         public async Task MovePartnerToTeam(MovePartnerToTeamCommand command)
         {
             var partner = await _partnerRepository.GetAsync(command.PartnerId) 
-                ?? throw new EntityNotFoundException("Failed to move partner to team");
+                ?? throw new EntityNotFoundException($"No partner exists with id {command.PartnerId}");
 
             var team = await _teamRepository.GetAsync(command.TeamId)
-                ?? throw new EntityNotFoundException("Failed to find team to move to");
+                ?? throw new EntityNotFoundException($"No team exists with id {command.TeamId}");
 
             partner.Team = team;
 
