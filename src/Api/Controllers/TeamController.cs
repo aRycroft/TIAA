@@ -15,16 +15,16 @@ namespace Api.Controllers
             _teamService = teamService;
         }
 
+        [HttpGet, Route("{id:int}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            return Ok(await _teamService.GetTeamAsync(new GetTeamQuery { Id = id }));
+        }
+
         [HttpGet, Route("GetAll")]
         public async Task<IActionResult> GetAll([FromQuery] GetAllTeamsQuery query)
         {
             return Ok(await _teamService.GetAllTeamsAsync(query));
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] GetTeamQuery query)
-        {
-            return Ok(await _teamService.GetTeamAsync(query));
         }
 
         [HttpPost]

@@ -23,6 +23,8 @@ namespace Api.UnitTests.Controllers
                 .ReturnsAsync(new List<PartnerDto> { new PartnerDto { } });
             _mockPartnerService.Setup(x => x.GetPartnerAsync(It.IsAny<GetPartnerQuery>()))
                 .ReturnsAsync(new PartnerDto { });
+            _mockPartnerService.Setup(x => x.AddPartnerAsync(It.IsAny<AddPartnerCommand>()))
+                .ReturnsAsync(new Partner{ });
 
             _systemUnderTest = new PartnerController(_mockPartnerService.Object);
         }
@@ -49,7 +51,7 @@ namespace Api.UnitTests.Controllers
         public async Task Post_Returns_Valid_Result()
         {
             await ControllerTestMethods.AssertControllerMethodReturnsExpectedAndCallsService<OkObjectResult, Partner>(
-                () => _systemUnderTest.Post(new AddPartnerCommand()), 
+                () => _systemUnderTest.Post(new AddPartnerCommand { Name = "test"}), 
                 () => _mockPartnerService.Verify(x => x.AddPartnerAsync(It.IsAny<AddPartnerCommand>()), Times.Once(), 
                     $"{nameof(PartnerController.Post)} should call partner service once."));
         }

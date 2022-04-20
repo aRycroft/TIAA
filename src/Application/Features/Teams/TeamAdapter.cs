@@ -7,28 +7,31 @@ namespace Application.Features.Teams
     {
         public TeamDto DtoFromEntity(Team team)
         {
-            return new TeamDto
+            return team != null ? new TeamDto
             {
                 Id = team.Id,
                 Name = team.Name
-            };
+            } 
+            : new TeamDto();
         }
 
         public Team EntityFromAddCommand(AddTeamCommand command)
         {
-            return new Team
+            return command != null ? new Team
             {
                 Name = command.Name
-            };
+            } 
+            : new Team();
         }
 
         public Team EntityFromUpdateCommand(UpdateTeamCommand command)
         {
-            return new Team 
+            return command != null ? new Team 
             { 
                 Id = command.Id, 
                 Name = command.Name 
-            };
+            }
+            : new Team();
         }
     }
 

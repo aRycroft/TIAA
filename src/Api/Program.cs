@@ -29,3 +29,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+//Need this for testing
+public partial class Program { }
+

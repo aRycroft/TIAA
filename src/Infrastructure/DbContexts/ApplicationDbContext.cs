@@ -18,6 +18,7 @@ namespace Infrastructure.DbContexts
 
         public DbSet<Partner> Partners { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<VotingAction> VotingActions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,6 +35,7 @@ namespace Infrastructure.DbContexts
     {
         DbSet<Partner> Partners { get; set; }
         DbSet<Team> Teams { get; set; }
+        DbSet<VotingAction> VotingActions { get; set; }
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }

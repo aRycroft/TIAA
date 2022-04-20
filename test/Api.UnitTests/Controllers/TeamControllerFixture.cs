@@ -23,6 +23,8 @@ namespace Api.UnitTests.Controllers
                 .ReturnsAsync(new List<TeamDto> { new TeamDto { } });
             _mockTeamService.Setup(x => x.GetTeamAsync(It.IsAny<GetTeamQuery>()))
                 .ReturnsAsync(new TeamDto { } );
+            _mockTeamService.Setup(x => x.AddTeamAsync(It.IsAny<AddTeamCommand>()))
+                .ReturnsAsync(new Team { });
 
             _systemUnderTest = new TeamController(_mockTeamService.Object);
         }
@@ -40,7 +42,7 @@ namespace Api.UnitTests.Controllers
         public async Task Get_Returns_Valid_Result()
         {
             await ControllerTestMethods.AssertControllerMethodReturnsExpectedAndCallsService<OkObjectResult, TeamDto>(
-                () => _systemUnderTest.Get(new GetTeamQuery()),
+                () => _systemUnderTest.Get(1),
                 () => _mockTeamService.Verify(x => x.GetTeamAsync(It.IsAny<GetTeamQuery>()), Times.Once(),
                     $"{nameof(TeamController.Get)} should call partner service once."));
         }
